@@ -310,7 +310,6 @@ local function jail_init()
   minetest.log("jail.jail_scan_seconds = " .. jail_scan_seconds)
 
   players_in_jail = load_jail_data()
-  minetest.log("jail.players_in_jail = " .. #players_in_jail)
 
   minetest.after(jail_scan_seconds, rejail_escapees)
 end
