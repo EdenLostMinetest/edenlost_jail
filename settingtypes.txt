@@ -1,0 +1,12 @@
+# Default position to send jailed players to
+jail.jail_pos (default jail posistion) float 0.0 3.0 0.0
+
+# Default position to return unjailed players to
+jail.jail_release_pos (default release position) float 0.0 3.0 0.0
+
+# How often (seconds) to rescan jailed players
+jail.jail_scan_seconds (rescan frequency, in seconds) float 10.0
+
+# How far (in nodes) jailed players can get away from `jail_pos` before being
+# considered an "escapee" and being teleported back to jail.
+jail.jail_max_distance = 10
