@@ -63,16 +63,18 @@ end
 
 local function load_jail_data()
   local file = io.open(jail_data_filename, "r")
+  local jail_data = {}
+
   if file then
-    jailData = minetest.deserialize(file:read("*all"))
+    jail_data = minetest.deserialize(file:read("*all"))
     file:close()
   end
 
-  if type(jailData) ~= "table" then
-    jailData = {}
+  if type(jail_data) ~= "table" then
+    jail_data = {}
   end
 
-  return jailData
+  return jail_data
 end  
 
 local function save_jail_data()
