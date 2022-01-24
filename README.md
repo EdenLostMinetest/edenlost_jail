@@ -31,6 +31,7 @@ Example command usage:
 ### Duration hints
 
 | Duration | Human Readable |
+| -------- | ------------------------------ |
 | (none) | Infinite |
 | 1 | 1 second |
 | 60 | 1 minute |
