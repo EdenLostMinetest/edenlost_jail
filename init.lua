@@ -10,6 +10,9 @@
 --     jail_release_pos = x,y,z
 --     jail_scan_seconds = 30
 --     jail_max_distance = 10
+--
+-- This mod exposes an API that can be used to jail, release and query players.
+-- See `jail.api at the bottom.
 
 -- Where to teleport prisoners to.
 local jail_pos = {x = 0, y = 3, z = 0}
@@ -140,6 +143,16 @@ local function release_player(jailer, prisoner)
   end
 
   minetest.chat_send_all(prisoner.." has been released from jail by "..jailer)
+end
+
+local function is_jailed(player_name)
+  if type(players_in_jail) ~= "table" then
+    return false
+  end
+  if not player_name then
+    return false
+  end
+  return not not players_in_jail[player_name]
 end
 
 -- Also handles auto-freeing prisoners when their sentence is up.
@@ -283,27 +296,27 @@ local function jail_init()
   local spawn = minetest.setting_get_pos("static_spawnpoint")
 
 
-  if minetest.setting_get_pos("jail_pos") then
-    jail_pos = minetest.setting_get_pos("jail_pos")
+  if minetest.setting_get_pos("jail.jail_pos") then
+    jail_pos = minetest.setting_get_pos("jail.jail_pos")
   elseif spawn then
     jail_pos = spawn
   end
   minetest.log("jail.jail_pos = " .. minetest.pos_to_string(jail_pos))
 
-  if minetest.setting_get_pos("jail_release_pos") then
-    release_pos = minetest.setting_get_pos("jail_release_pos")
+  if minetest.setting_get_pos("jail.jail_release_pos") then
+    release_pos = minetest.setting_get_pos("jail.jail_release_pos")
   elseif spawn then
     release_pos = spawn
   end
   minetest.log("jail.jail_release_pos = " .. minetest.pos_to_string(release_pos))
 
-  local jmd = tonumber(minetest.settings:get("jail_max_distance"))
+  local jmd = tonumber(minetest.settings:get("jail.jail_max_distance"))
   if jmd then
     jail_max_distance = jmd
   end
   minetest.log("jail.jail_max_distance = " .. jail_max_distance)
 
-  local ss = tonumber(minetest.settings:get("jail_scan_seconds"))
+  local ss = tonumber(minetest.settings:get("jail.jail_scan_seconds"))
   if ss then
     jail_scan_seconds = ss
   end
@@ -315,4 +328,15 @@ local function jail_init()
 end
 
 jail_init()
+
+-- Expose an api.
+jail = {
+  api_version = 1.0,
+
+  api = {
+    jail_player = jail_player,
+    release_player = release_player,
+    is_jailed = is_jailed,
+  }
+}
 

@@ -45,21 +45,21 @@ Example command usage:
 
 ## Settings (minetest.conf)
 
-1. `jail_pos` - Where to teleport jailed players to.
-1. `jail_release_pos` - Where to teleport released players to.
-1. `jail_scan_seconds` - How often to scan for escapees.
+1. `jail.jail_pos` - Where to teleport jailed players to.
+1. `jail.jail_release_pos` - Where to teleport released players to.
+1. `jail.jail_scan_seconds` - How often to scan for escapees.
    - Do not make this too fast, or server performance could suffer.
-1. `jail_max_distance` - How many nodes a player can be away from before being
-    considered an 'escapee' and teleported back to jail.
+1. `jail.jail_max_distance` - How many nodes a player can be away from before
+    being considered an 'escapee' and teleported back to jail.
 
 ### Example:
 
 ```
 # Jail
-jail_pos = 605,179,-623
-jail_release_pos = 0,3,0
-jail_scan_seconds = 10
-jail_max_distance = 10
+jail.jail_pos = 605,179,-623
+jail.jail_release_pos = 0,3,0
+jail.jail_scan_seconds = 10
+jail.jail_max_distance = 10
 ```
 
 ## Nodes and Tools
@@ -82,3 +82,7 @@ And a non-craftable tool that can break these unbreakable blocks:
 /giveme jail:glass
 /giveme jail:ironbars
 ```
+
+## API
+
+To be documented.  See bottom on `init.lua` for implementation.
